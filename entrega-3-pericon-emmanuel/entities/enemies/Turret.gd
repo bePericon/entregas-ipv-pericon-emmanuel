@@ -46,4 +46,9 @@ func _on_DetectionArea_body_shape_exited(body_rid, body, body_shape_index, local
 	if body == target:
 		target = null
 		fire_timer.stop()
-		
+
+
+func hit():
+	# Don't work
+	print("damaged torret!!")
+	

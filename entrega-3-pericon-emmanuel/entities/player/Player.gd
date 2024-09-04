@@ -46,3 +46,8 @@ func _physics_process(delta):
 	velocity.y += GRAVITY
 	move_and_slide(velocity, Vector2.UP)
 #	position += velocity * delta
+
+
+func hit():
+	get_parent().remove_child(self)
+	queue_free()
