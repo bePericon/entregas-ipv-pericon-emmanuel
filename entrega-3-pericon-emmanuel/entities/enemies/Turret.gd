@@ -8,7 +8,7 @@ export (PackedScene) var projectile_scene
 var projectile_container
 
 var target:Node2D
-var walls:Array = []
+var should_fire = true
 
 func _ready():
 	fire_timer.connect("timeout", self, "fire_at_player")
@@ -19,28 +19,25 @@ func initialize(container, turret_pos, projectile_container):
 	global_position = turret_pos
 	self.projectile_container = projectile_container
 
-
-#func _exist_wall():
-#	var target_direction = fire_position.global_position.direction_to(target.global_position)
-#	var exist = false
-#	for wall in walls:
-#		var wall_direction = fire_position.global_position.direction_to(wall.global_position)
-#		if wall_direction == target_direction:
-#			exist = true
-#			break
-#	return exist
+func _physics_process(delta):
+	# Knows if exist something between the torret and target
+	if(target):
+		var space_state = get_world_2d().direct_space_state
+		var result = space_state.intersect_ray(global_position, target.global_position)
+		if(result && result.collider is Wall):
+			should_fire = false
+		else:
+			should_fire = true
+			
 
 func fire_at_player():
-#	if(!_exist_wall()):
+	if(should_fire):
 		var proj_instance = projectile_scene.instance()
 		proj_instance.initialize(projectile_container, fire_position.global_position, fire_position.global_position.direction_to(target.global_position))
-#	else:
-#		fire_timer.stop()
+
 
 func _on_DetectionArea_body_entered(body):
-	if(body is Wall):
-		walls.push_back(body)
-	elif target == null:
+	if target == null && !(body is Wall):
 		target = body
 		fire_timer.start()
 
