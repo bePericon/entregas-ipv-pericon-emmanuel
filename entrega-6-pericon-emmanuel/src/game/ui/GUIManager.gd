@@ -6,8 +6,10 @@ extends Control
 
 onready var hp_progress_1: TextureProgress = $"%HpProgress1"
 onready var hp_progress_2: TextureProgress = $"%HpProgress2"
+onready var mana_progress: TextureProgress = $"%ManaProgress"
+onready var stamina_progress: ProgressBar = $"%StaminaProgress"
 
-onready var fading_elements: Array = [hp_progress_1]
+onready var fading_elements: Array = [hp_progress_1, mana_progress, stamina_progress]
 
 export (float) var fade_duration: float = 5.0
 export (float) var fade_delay: float = 2.0
@@ -26,6 +28,11 @@ func _on_current_player_changed(player: Player) -> void:
 	player.connect("hp_changed", self, "_on_hp_changed")
 	_on_hp_changed(player.hp, player.max_hp)
 
+	player.connect("mana_changed", self, "_on_mana_changed")
+	_on_mana_changed(player.mana, player.max_mana)
+	
+	player.connect("stamina_changed", self, "_on_stamina_changed")
+	_on_stamina_changed(player.stamina, player.max_stamina)
 
 # Callback de cambio de HP.
 func _on_hp_changed(hp: int, hp_max: int) -> void:
@@ -35,6 +42,15 @@ func _on_hp_changed(hp: int, hp_max: int) -> void:
 	hp_progress_2.value = hp
 	_animate_fade()
 
+func _on_mana_changed(mana: float, mana_max: float) -> void:
+	mana_progress.max_value = mana_max
+	mana_progress.value = mana
+	_animate_fade()
+
+func _on_stamina_changed(stamina: float, stamina_max: float) -> void:
+	mana_progress.max_value = stamina_max
+	mana_progress.value = stamina
+	_animate_fade()
 
 # Función de ayuda para animar el fade-out de elementos de la escena.
 func _animate_fade() -> void:

@@ -138,12 +138,14 @@ size_flags_horizontal = 3
 
 [node name="ActionInput" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_right = 166.0
-action_input = "Move Left"
+action_input = "A"
+action_name = "Move Left"
 
 [node name="ActionInput2" parent="MainPanel/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
 margin_top = 46.0
 margin_right = 166.0
 margin_bottom = 88.0
-action_input = "Move Right"
+action_input = "D"
+action_name = "Move Right"
 
 [connection signal="pressed" from="MainPanel/ReturnButton" to="." method="hide"]

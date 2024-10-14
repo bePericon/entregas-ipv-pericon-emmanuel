@@ -18,6 +18,6 @@ func _set_action_input(inp: String) -> void:
 		$"%Input".text = inp
 
 func _set_action_name(nm: String) -> void:
-	action_input = nm
+	action_name = nm
 	if Engine.editor_hint && has_node("%Action"):
 		$"%Action".text = nm
