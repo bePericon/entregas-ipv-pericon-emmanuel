@@ -295,6 +295,7 @@ parameters = [ [ [ Vector2( 1, 1 ) ], [ Vector2( 1.5, 1.5 ) ] ], [ [ 100.0 ] ] ]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Triggers/TriggerArea5"]
 shape = SubResource( 3 )
 
+[connection signal="return_selected" from="UILayer/PauseMenu" to="." method="_on_return_requested"]
 [connection signal="next_selected" from="UILayer/VictoryMenu" to="." method="_on_level_won"]
 [connection signal="return_selected" from="UILayer/VictoryMenu" to="." method="_on_return_requested"]
 [connection signal="retry_selected" from="UILayer/DefeatMenu" to="." method="_on_restart_requested"]
