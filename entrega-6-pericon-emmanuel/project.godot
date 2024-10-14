@@ -62,7 +62,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Proyecto Godot - Clase 7"
+config/name="entrega-6-pericon-emmanuel"
 run/main_scene="res://src/screens/MainMenu.tscn"
 config/icon="res://icon.png"
 
